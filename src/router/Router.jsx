@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import RequireAuth from "./RequireAuth";
 
 import DashboardLayout from "@/components/layout/DashboardLayout.jsx";
@@ -9,22 +9,26 @@ import IncomePage from "@/pages/Income.jsx";
 import ExpensePage from "@/pages/Expense.jsx";
 
 import Login from "@/pages/Auth/Login.jsx";
-import Register from "@/pages/Auth/Register.jsx"; // create later, or point to your existing
-import ForgotPassword from "@/pages/Auth/ForgotPassword.jsx"; // optional
+import Register from "@/pages/Auth/Register.jsx";
+import ForgotPassword from "@/pages/Auth/ForgotPassword.jsx";
+import Home from "@/pages/Home.jsx";
+import RootRedirect from "@/pages/RootRedirect.jsx";
 
 export default function Router() {
   return (
     <Routes>
-      {/* Public auth routes */}
+      {/* Root path decides where to go */}
+      <Route path="/" element={<RootRedirect />} />
+
+      {/* Public routes */}
+      <Route path="/home" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
-      {/* optional */}
       <Route path="/forgotpassword" element={<ForgotPassword />} />
 
       {/* Protected app */}
-
       <Route
-        path="/"
+        path="/dashboard"
         element={
           <RequireAuth>
             <DashboardLayout />
